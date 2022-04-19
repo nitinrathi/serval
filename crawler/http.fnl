@@ -1,19 +1,68 @@
-(local http (require :socket.http))
-(local ltn12 (require :ltn12))
+(local http (require :http.request))
+(local xml (require :xml2lua))
+(local xml-handler (require :xmlhandler.tree))
+(local lua-xml (require :LuaXML))
+(local gumbo (require :gumbo))
+(local fennel (require :fennel))
+(local lume (require :lume))
+
+(fn istable
+  [t]
+  (= "table" (type t)))
+
+(local slaxml (require :slaxml))
+(local sladom (require :slaxdom))
 
 (fn get [url]
   (print "url is " url)
-  (let [t {}
-        (resp status-code headers) (http.request {:url url
-                                                  :sink (ltn12.sink.table t)
-                                                  :redirect true})]
-    (each [key value (pairs headers)]
-      (print ">" key value))
-    (print "status code" status-code)
-    (if (or (= 301 status-code) (= 302 status-code))
-      (get headers.location)
-      (table.concat t))))
+  (let [request (http.new_from_uri url)
+        (headers stream) (request:go)
+        body (stream:get_body_as_string)]
+    body))
 
-;(print (get "https://w3.impa.br/~diego/software/luasocket/"))
+(fn text [html]
+  (let [parser (xml.parser xml-handler)]
+    (parser:parse html)
+    (pairs xml-handler.root)))
+
+(fn text2 [html]
+  (lua-xml.eval html))
+
+(fn text3 [html]
+  (let [parser (slaxml:parser)]
+    (parser:parse html)))
+
+(fn text4 [html]
+  (sladom:dom html))
+
+(fn text5 [html]
+  (let [document (gumbo.parse html)]
+    document.body.textContent))
+
+(fn text6 [html]
+  (let [document (gumbo.parse html)]
+    document))
+
+
+(local url "https://en.wikipedia.org/wiki/Main_Page")
+;(local url "https://w3.impa.br/~diego/software/luasocket/")
+;(local url "https://www.lua.org/")
+;(local url "https://100x100.games")
+;(print (text2 (get url)))
+;(print (text3 (get url)))
+;(print (text4 (get url) {:stripWhitespace true}))
+(fn kk
+  [tab]
+  (each [key value (pairs tab)]
+    (if
+      (istable value) (kk value)
+      (do 
+        (print key ":" value)))))
+
+(kk (text6 (get url)))
+(print (istable "asd"))
+;(print (fennel.view (text6 (get url))))
+
+;(print (text (get "https://w3.impa.br/~diego/software/luasocket/")))
 ;(print (get "http://orowealth.com"))
-(print (get "https://en.wikipedia.org/wiki/Main_Page"))
+;(print (get "https://en.wikipedia.org/wiki/Main_Page"))
