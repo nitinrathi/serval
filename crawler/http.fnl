@@ -1,7 +1,4 @@
 (local http (require :http.request))
-(local xml (require :xml2lua))
-(local xml-handler (require :xmlhandler.tree))
-(local lua-xml (require :LuaXML))
 (local gumbo (require :gumbo))
 (local fennel (require :fennel))
 (local lume (require :lume))
@@ -10,30 +7,12 @@
   [t]
   (= "table" (type t)))
 
-(local slaxml (require :slaxml))
-(local sladom (require :slaxdom))
-
 (fn get [url]
   (print "url is " url)
   (let [request (http.new_from_uri url)
         (headers stream) (request:go)
         body (stream:get_body_as_string)]
     body))
-
-(fn text [html]
-  (let [parser (xml.parser xml-handler)]
-    (parser:parse html)
-    (pairs xml-handler.root)))
-
-(fn text2 [html]
-  (lua-xml.eval html))
-
-(fn text3 [html]
-  (let [parser (slaxml:parser)]
-    (parser:parse html)))
-
-(fn text4 [html]
-  (sladom:dom html))
 
 (fn text5 [html]
   (let [document (gumbo.parse html)]
