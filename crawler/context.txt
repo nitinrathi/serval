@@ -1,0 +1,4 @@
+* start implementing crop-hash
+* crop links with crop-hash
+* find unique links
+* test crawl on image files.
