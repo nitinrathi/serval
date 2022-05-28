@@ -6,23 +6,31 @@
         : curry
         } (require :fume))
 (local {
-        : len
         : gsub
+        : len
         :find find-string
         :sub sub-string
         } string)
+
 
 (fn blank?
   [str]
   (or (falsey? str)
       (and (= :string (type str))
            (= 0 (len str)))))
-
-(fn find
+(fn _find
   [pattern str]
-  (match [str pattern]
-    [str nil] (fn [pattern] (find str pattern))
-    [str pattern] (find-string str pattern)))
+  (find-string str pattern))
+
+(local find (curry 2 _find))
+
+(fn _replace
+ [pattern replacement str] 
+ (if (nil? (find pattern str))
+   str
+   (gsub str pattern replacement)))
+
+(local replace (curry 3 _replace))
 
 (fn lossy-compress
   [str] 
@@ -35,12 +43,27 @@
     nil str
     j (sub-string str 1 (dec j))))
 
-(local until (curry _until 2))
+(local until (curry 2 _until))
+
+(fn _endswith?
+  [pattern str]
+  (find (.. pattern :$) str))
+
+(local endswith? (curry 2 _endswith?))
+
+(fn _startswith?
+  [pattern str]
+  (find (.. :^ pattern) str))
+
+(local startswith? (curry 2 _startswith?))
 
 {
  : blank?
  : find
+ : replace
  : len
+ : endswith?
+ : startswith?
  : lossy-compress
  : until
  }

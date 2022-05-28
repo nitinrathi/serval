@@ -113,13 +113,6 @@
 
 (fn main []
   (let [data (clean (crawl {:uri url}))]
-    (pprint data))
-  )
+    (pprint data)))
 
 (main)
-
-(local add (curry (fn 
-                    [x y]
-                    (+ x y))
-                  2))
-(print ((add 1) 2))

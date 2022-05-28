@@ -22,7 +22,7 @@
      [x y z] (f x y z))))
 
 (fn curry
-  [f n]
+  [n f]
   (match n
     1 (curry1 f)
     2 (curry2 f)
@@ -75,7 +75,7 @@
       (table.insert _items (f item)))
     _items))
 
-(local map (curry _map 2))
+(local map (curry  2 _map))
 
 (fn _filter
   [f items]
@@ -85,7 +85,7 @@
         (table.insert _items item)))
     _items))
 
-(local filter (curry2 _filter))
+(local filter (curry 2 _filter))
 
 (fn complement
   [f]
