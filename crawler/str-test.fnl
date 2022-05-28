@@ -7,12 +7,4 @@
   (test.eq? (str.replace :c :a :abc) :aba)
   (test.eq? (str.replace :c :a :abcdc) :abada))
 
-
-
-
-(fn jj-test
-  []
-  (print "only"))
-
-{: test-replace
- : jj-test }
+{: test-replace }

@@ -4,7 +4,6 @@
 (local {: pnp->> } (require :utils))
 (local {: keys : filter : map } (require :fume))
 
-
 (fn run-test
   [tests]
   (let [filter-test-fns (fn [prefix tests]
@@ -20,7 +19,6 @@
       ((. tests f)))))
 
 (local run-tests (map run-test))
-
 
 (run-tests [str-test])
 
