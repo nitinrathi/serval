@@ -35,6 +35,7 @@
         (. :links)
         get-hrefs)))
 
+
 (fn title
   [html-content]
   (let [getElementByTagName (fn [parsed tag]

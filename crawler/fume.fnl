@@ -10,6 +10,8 @@
 
 (local head first)
 
+
+
 (fn keys
   [x]
   (let [_keys []]
@@ -24,10 +26,19 @@
       (table.insert _items item))
     _items))
 
+
+(fn false?
+  [x]
+  (= false x))
+
+(fn nil?
+  [x]
+  (= x nil))
+
 (fn falsey?
   [x]
-  (or (= nil x)
-      (= false x)))
+  (or (nil? x)
+      (false? x)))
 
 (fn _map
   [f items]
@@ -46,12 +57,17 @@
 
 (fn filter
   [f items]
-  (if (falsey? items)
-    (fn [_items]
-      (_filter f _items))
-    (_filter f items)))
+  (match [f items]
+    [f nil] (fn [items] (_filter f items))
+    [f items] (_filter f items)))
 
 (fn map
+  [f items]
+  (match [f items]
+    [f nil] (fn [items] (_map f items))
+    [f items]  (_map f items)))
+
+(fn __map
   [f items]
   (if (falsey? items)
     (fn [_items]
@@ -72,6 +88,10 @@
   [x]
   (- x 1))
 
+(fn inc
+  [x]
+  (+ x 1))
+
 (fn unique
   [x]
   (let [_set []]
@@ -79,9 +99,31 @@
       (tset _set key true))
     (keys _set)))
 
+(fn curry1
+  ;; not implemented
+  [f]
+  (fn [x]
+    (f [x])))
+
+(lambda curry2
+  ;; not implemented
+  [f x y]
+  (if (falsey? x)  (x)))
+
+(fn curry2
+  ;; not implemented
+  [x]
+  x)
+
+(fn curry
+  [f n]
+  ;; not implemented
+  f)
+
 {
  : first
  : dec
+ : inc
  : head
  : identity
  : items
@@ -91,4 +133,7 @@
  : filter
  : always
  : unique
+ : nil?
+ : false?
+ : falsey?
  }

@@ -13,9 +13,11 @@
 (local {: complement 
         : map
         : dec
+        : inc
         : identity 
         : unique
         : filter
+        : nil?
         : always } (require :fume))
 
 ;; three different urls to read data from
@@ -33,7 +35,6 @@
     (set content (http.GET url))
     (fs.write "test.data" content))
   (set content (fs.read "test.data")))
-
 
 ;(pprint (html.text content))
 
@@ -62,17 +63,31 @@
    : title }))
 
 (fn crawl
-  [uri]
+  [{: uri }]
   (let [content          (http.GET uri)
-        {: links : text} (extract content uri)
+        {: links : text} (extract content uri)]
+    {: text : links : uri }))
 
-        full-links-fn    (map #(full-link uri $))
-        links            (filter (complement str.blank?) links)
-        links            (full-links-fn links)
-        text             (str.lossy-compress text)
+(fn clean-links
+  [{: links : text : uri}]
+  (let [not-blank? (complement str.blank?)
+        add-base-uri #(full-link uri $)
+        links (->> links
+                   (filter not-blank?)
+                   (map add-base-uri))]
+    {: links : text : uri }))
 
-        ]
-    {: text : links}))
+(fn clean-text
+  [{: links : text : uri}]
+  (let [text (str.lossy-compress text)]
+    {: links : text : uri }))
+
+
+(fn clean
+  [page]
+  (-> page
+      clean-links
+      clean-text))
 
 ;(local data (crawl url))
 ;(local data (extract content))
@@ -82,26 +97,19 @@
 ;(pprint (. data :title))
 
 
-(fn 
-  rec-crawl
-  [url depth]
-  (print depth url)
-  (let [depth (or depth 3)
-        data (crawl url)
-        depth (dec depth) ]
-
-    (pprint (. data :links))
-
+(lambda rec-crawl
+  [uri depth]
+  (let [depth (dec (or depth 3))
+        data  (-> {: uri }
+                  crawl
+                  clean)]
     (if (> depth 0)
      (each [_ link (ipairs (. data :links))]
        (rec-crawl link depth)))))
-
 ;; imp
-;(print (rec-crawl url 1))
 
-(fn crop-hash
-  [url]
-  ()
-  )
+(fn main []
+  (let [data (clean (crawl {:uri url}))]
+    (pprint data)))
 
-(pprint (unique [1 2 3 4 4 5]))
+(main)

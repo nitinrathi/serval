@@ -6,10 +6,9 @@
 
 (fn read
   [filename]
-  (let [file (assert (io.open filename :rb))
-        content (file:read :*a)]
-    (file:close)
-    content))
+  (match (io.open filename :rb)
+    nil  nil
+    file (file:read :*a)))
 
 {: write
  : read }
