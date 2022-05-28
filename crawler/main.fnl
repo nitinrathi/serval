@@ -1,4 +1,5 @@
 (local http (require :http))
+(local fennel (require :fennel))
 (local html (require :html))
 (local neturl (require :neturl))
 (local fs (require :fs))
@@ -13,19 +14,17 @@
 (local {: complement 
         : map
         : dec
+        : keys
         : inc
         : identity 
         : unique
         : filter
         : nil?
+        : curry
         : always } (require :fume))
 
-;; three different urls to read data from
 
 ;(local url "https://en.wikipedia.org/wiki/Main_Page")
-;(local url "https://www.hytradboi.com/")
-;(local url "https://100x100.games")
-;(local url "https://www.heinrichhartmann.com/")
 (local url "http://lua-users.org/wiki/PatternsTutorial")
 
 (var content "")
@@ -72,9 +71,13 @@
   [{: links : text : uri}]
   (let [not-blank? (complement str.blank?)
         add-base-uri #(full-link uri $)
+        until-hash (str.until "#")
         links (->> links
                    (filter not-blank?)
-                   (map add-base-uri))]
+                   (map add-base-uri)
+                   (map until-hash)
+                   unique
+                   )]
     {: links : text : uri }))
 
 (fn clean-text
@@ -110,6 +113,13 @@
 
 (fn main []
   (let [data (clean (crawl {:uri url}))]
-    (pprint data)))
+    (pprint data))
+  )
 
 (main)
+
+(local add (curry (fn 
+                    [x y]
+                    (+ x y))
+                  2))
+(print ((add 1) 2))

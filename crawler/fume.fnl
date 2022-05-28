@@ -1,5 +1,33 @@
 (local {: pprint } (require :utils))
 
+(fn curry1
+  ;; not implemented
+  [f]
+  (fn [x]
+    (f [x])))
+
+(lambda curry2
+  [f]
+  (fn [x y]
+    (match [x y]
+      [x nil] (fn [y] (f x y)) 
+      [x y] (f x y) )))
+
+(lambda curry3
+  [f]
+  (fn [x y z]
+    (match [x y z]
+     [x nil nil] (curry2 (fn [y z] (f x y z))) 
+     [x y nil] (fn [z] (f x y z)) 
+     [x y z] (f x y z))))
+
+(fn curry
+  [f n]
+  (match n
+    1 (curry1 f)
+    2 (curry2 f)
+    3 (curry3 f)))
+
 (fn identity
   [x]
   x)
@@ -47,6 +75,8 @@
       (table.insert _items (f item)))
     _items))
 
+(local map (curry _map 2))
+
 (fn _filter
   [f items]
   (let [_items []]
@@ -55,24 +85,7 @@
         (table.insert _items item)))
     _items))
 
-(fn filter
-  [f items]
-  (match [f items]
-    [f nil] (fn [items] (_filter f items))
-    [f items] (_filter f items)))
-
-(fn map
-  [f items]
-  (match [f items]
-    [f nil] (fn [items] (_map f items))
-    [f items]  (_map f items)))
-
-(fn __map
-  [f items]
-  (if (falsey? items)
-    (fn [_items]
-      (_map f _items))
-    (_map f items)))
+(local filter (curry2 _filter))
 
 (fn complement
   [f]
@@ -95,30 +108,10 @@
 (fn unique
   [x]
   (let [_set []]
-    (each [key _ (pairs x)]
+    (each [_ key (pairs x)]
       (tset _set key true))
     (keys _set)))
 
-(fn curry1
-  ;; not implemented
-  [f]
-  (fn [x]
-    (f [x])))
-
-(lambda curry2
-  ;; not implemented
-  [f x y]
-  (if (falsey? x)  (x)))
-
-(fn curry2
-  ;; not implemented
-  [x]
-  x)
-
-(fn curry
-  [f n]
-  ;; not implemented
-  f)
 
 {
  : first
@@ -136,4 +129,6 @@
  : nil?
  : false?
  : falsey?
+ : curry
  }
+
