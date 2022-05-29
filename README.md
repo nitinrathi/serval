@@ -1,4 +1,4 @@
-# Installing deps
+### Installing deps
 ```bash
 cd crawler
 luarocks --tree lua_modules install lsqlite3complete
@@ -6,13 +6,13 @@ luarocks --tree lua_modules install gumbo
 luarocks --tree lua_modules install Lua-cURL CURL_INCDIR=/usr/include/x86_64-linux-gnu/
 ```
 
-# Run
+### Run
 ```bash
 cd crawler
 fennel -l ini.fnl main.fnl
 ```
 
-# Test
+### Test
 ```bash
 cd crawler
 fennel -l ini.fnl test.fnl
