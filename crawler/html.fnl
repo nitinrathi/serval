@@ -38,13 +38,11 @@
 
 (fn title
   [html-content]
-  (let [getElementByTagName (fn [parsed tag]
-                              (parsed:getElementsByTagName tag))]
-    (-> html-content
+  (-> html-content
         parse
-        (getElementByTagName :title) 
+        (: :getElementsByTagName :title) 
         first
-        (. :innerHTML))))
+        (. :innerHTML)))
 
 
 {: hello

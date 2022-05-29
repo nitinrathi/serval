@@ -70,7 +70,7 @@
     {: text : links : uri }))
 
 (fn clean-links
-  [{: links : text : uri}]
+  [{: links : text : uri : title }]
   (let [not-blank? (complement str.blank?)
         add-base-uri #(full-link uri $)
         until-hash (str.until "#")
@@ -80,12 +80,12 @@
                    (map until-hash)
                    unique
                    )]
-    {: links : text : uri }))
+    {: links : text : uri : title }))
 
 (fn clean-text
-  [{: links : text : uri}]
+  [{: links : text : uri : title }]
   (let [text (str.lossy-compress text)]
-    {: links : text : uri }))
+    {: links : text : uri : title }))
 
 
 (fn clean
@@ -95,8 +95,8 @@
       clean-text))
 
 ;(local data (crawl url))
-;(local data (extract content))
-
+(local data (extract content))
+(pprint data)
 ;(pprint (str.lossy-compress (. data :text)))
 ;(pprint (. data :links))
 ;(pprint (. data :title))
