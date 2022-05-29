@@ -23,3 +23,4 @@ Few Resources and Referances
 * https://leafo.net/guides/customizing-the-luarocks-tree.html#quick-guide
 * https://github.com/rxi/lume/blob/master/lume.lua
 * https://openresty.org/en/using-luarocks.html
+* https://github.com/Egor-Skriptunoff/pure_lua_SHA

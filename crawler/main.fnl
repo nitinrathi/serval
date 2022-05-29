@@ -95,8 +95,8 @@
       clean-text))
 
 ;(local data (crawl url))
-(local data (extract content))
-(pprint data)
+;(local data (extract content))
+;(pprint data)
 ;(pprint (str.lossy-compress (. data :text)))
 ;(pprint (. data :links))
 ;(pprint (. data :title))
@@ -120,9 +120,15 @@
 (fn db-test []
   (db.test))
 
+(fn sha-test
+  []
+  (let [sha2 (require :sha2)]
+    (print ( sha2.sha256 "abc"))))
+
 (fn main []
   ;(crawl-test)
-  (db-test))
+  ;(db-test)
+  (sha-test))
 
 
 (main)
