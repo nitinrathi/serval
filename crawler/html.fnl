@@ -45,9 +45,6 @@
         (. :innerHTML)))
 
 
-{: hello
- : parse
- : title
+{: title
  : text
- : links
- : gumbo}
+ : links}

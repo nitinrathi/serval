@@ -1,3 +1,4 @@
+(local {: view} (require :fennel))
 (local {: falsey? : nil? } (require :fume))
 
 (fn eq?
@@ -6,6 +7,7 @@
                   [:number] (= left right)
                   [:string] (= left right)
                   [:boolean] (= left right)
+                  [:table] (= (view left) (view right))
                   [:nil] (= left right)
                   _ false)]
     (if (falsey? matches?)
@@ -21,7 +23,13 @@
   (if (nil? x)
       (assert (values nil (.. :test-failed " expected not nil")))))
 
+(fn string?
+  [x]
+  (if (not (= "string" (type x)))
+      (assert (values nil (.. :test-failed " expected string")))))
+
 {
  : eq?
  : not-nil?
+ : string?
  }

@@ -1,8 +1,10 @@
-(local str-test (require :str-test))
 (local fennel (require :fennel))
 (local str (require :str))
 (local {: pnp->> } (require :utils))
 (local {: keys : filter : map } (require :fume))
+
+(local str-test (require :str-test))
+(local html-test (require :html-test))
 
 (fn run-test
   [tests]
@@ -20,5 +22,6 @@
 
 (local run-tests (map run-test))
 
-(run-tests [str-test])
+(run-tests [str-test
+            html-test])
 
