@@ -3,6 +3,8 @@
 (local html (require :html))
 (local neturl (require :neturl))
 (local fs (require :fs))
+(local db (require :db))
+(local sqlite (require :lsqlite3complete))
 (local str (require :str))
 (local {: pnp 
         : pnp->
@@ -111,8 +113,16 @@
        (rec-crawl link depth)))))
 ;; imp
 
-(fn main []
+(fn crawl-test []
   (let [data (clean (crawl {:uri url}))]
     (pprint data)))
+
+(fn db-test []
+  (db.test))
+
+(fn main []
+  ;(crawl-test)
+  (db-test))
+
 
 (main)

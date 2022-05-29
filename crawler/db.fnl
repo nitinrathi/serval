@@ -1,3 +1,4 @@
+(local sqlite (require :lsqlite3complete))
 (local store {})
 (fn _set
   [key value]
@@ -7,5 +8,12 @@
   [key]
   (. store key))
 
+(fn test []
+  (let [db  (sqlite.open_memory)]
+    (print db)
+    (assert (db:exec "CREATE TABLE test (col1, col2)"))))
+
 {:set _set
- :get _get }
+ :get _get
+ : test
+ }
