@@ -12,6 +12,8 @@
         :sub sub-string
         } string)
 
+(local {:concat concat-table} table)
+
 
 (fn blank?
   [str]
@@ -57,6 +59,12 @@
 
 (local startswith? (curry 2 _startswith?))
 
+(fn _join
+  [bond _list]
+  (concat-table _list bond))
+
+(local join (curry  2 _join))
+
 {
  : blank?
  : find
@@ -66,4 +74,5 @@
  : startswith?
  : lossy-compress
  : until
+ : join
  }

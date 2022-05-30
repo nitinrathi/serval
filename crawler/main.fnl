@@ -128,7 +128,9 @@
 (fn main []
   ;(crawl-test)
   ;(db-test)
-  (sha-test))
+  ;(sha-test)
+  
+  )
 
 
 (main)

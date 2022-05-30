@@ -5,6 +5,7 @@
 
 (local str-test (require :str-test))
 (local html-test (require :html-test))
+(local db-test (require :db-test))
 
 (fn run-test
   [tests]
@@ -23,5 +24,5 @@
 (local run-tests (map run-test))
 
 (run-tests [str-test
-            html-test])
-
+            html-test
+            db-test])

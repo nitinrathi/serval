@@ -10,5 +10,10 @@
     nil  nil
     file (file:read :*a)))
 
+(fn create-dir
+  [path]
+  (path)
+  )
+
 {: write
  : read }
