@@ -5,6 +5,7 @@
 (fn test-mkdir
   []
   (test.not-nil? (fs.mkdir "/tmp/test-dir"))
+  (test.nil? (fs.mkdir "/test-dir"))
   (test.eq? :dir-created (fs.mkdir "/tmp/test-dir-2")))
 
 (fn test-touch

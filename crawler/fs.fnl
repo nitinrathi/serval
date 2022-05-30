@@ -21,10 +21,12 @@
   [path]
   (let [cmd (-> [:mkdir :-p path]
                 create-cmd
-                os.execute)]
-    (match cmd
-      true :dir-created
+                (io.popen :r))
+        output (cmd:read :*a)]
+    (match output
+      "" :touched
       _ nil)))
+
 
 (fn touch
   [path]
