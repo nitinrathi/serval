@@ -6,6 +6,7 @@
 (local str-test (require :str-test))
 (local html-test (require :html-test))
 (local db-test (require :db-test))
+(local fs-test (require :fs-test))
 
 (fn run-test
   [tests]
@@ -25,4 +26,5 @@
 
 (run-tests [str-test
             html-test
-            db-test])
+            db-test
+            fs-test])

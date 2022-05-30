@@ -23,6 +23,11 @@
   (if (nil? x)
       (assert (values nil (.. :test-failed " expected not nil")))))
 
+(fn nil?
+  [x]
+  (if (not (nil? x))
+      (assert (values nil (.. :test-failed " expected nil")))))
+
 (fn string?
   [x]
   (if (not (= "string" (type x)))
@@ -30,6 +35,7 @@
 
 {
  : eq?
+ : nil?
  : not-nil?
  : string?
  }

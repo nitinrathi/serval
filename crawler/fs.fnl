@@ -1,3 +1,10 @@
+(local str (require :str))
+
+(fn create-cmd
+  [cmd]
+  (.. (str.join " " cmd)
+      " 2>&1"))
+
 (fn write
   [filename content]
   (let [file (assert (io.open filename :wb))]
@@ -10,10 +17,26 @@
     nil  nil
     file (file:read :*a)))
 
-(fn create-dir
+(fn mkdir
   [path]
-  (path)
-  )
+  (let [cmd (-> [:mkdir :-p path]
+                create-cmd
+                os.execute)]
+    (match cmd
+      true :dir-created
+      _ nil)))
 
-{: write
+(fn touch
+  [path]
+  (let [cmd (-> [:touch path]
+                create-cmd
+                (io.popen :r))
+        output (cmd:read :*a)]
+    (match output
+      "" :touched
+      _ nil)))
+
+{: mkdir
+ : touch
+ : write
  : read }
