@@ -1,5 +1,5 @@
 (local fennel (require :fennel))
-(local {: pprint } (require :utils))
+(local {: pprint} (require :utils))
 (local curl (require :cURL))
 (local html (require :html))
 (local {: identity : first : keys : items : map} (require :fume))
@@ -14,4 +14,4 @@
     (table.concat response)))
 
 
-{: GET }
+{: GET}

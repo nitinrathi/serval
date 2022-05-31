@@ -23,7 +23,8 @@
         : filter
         : nil?
         : curry
-        : always } (require :fume))
+        : always
+        } (require :fume))
 
 
 ;(local url "https://en.wikipedia.org/wiki/Main_Page")
@@ -94,14 +95,6 @@
       clean-links
       clean-text))
 
-;(local data (crawl url))
-;(local data (extract content))
-;(pprint data)
-;(pprint (str.lossy-compress (. data :text)))
-;(pprint (. data :links))
-;(pprint (. data :title))
-
-
 (lambda rec-crawl
   [uri depth]
   (let [depth (dec (or depth 3))
@@ -111,7 +104,6 @@
     (if (> depth 0)
      (each [_ link (ipairs (. data :links))]
        (rec-crawl link depth)))))
-;; imp
 
 (fn crawl-test []
   (let [data (clean (crawl {:uri url}))]
@@ -129,7 +121,6 @@
   ;(crawl-test)
   ;(db-test)
   ;(sha-test)
-  
   )
 
 

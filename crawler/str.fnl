@@ -14,7 +14,6 @@
 
 (local {:concat concat-table} table)
 
-
 (fn blank?
   [str]
   (or (falsey? str)
@@ -65,8 +64,7 @@
 
 (local join (curry  2 _join))
 
-{
- : blank?
+{: blank?
  : find
  : replace
  : len
@@ -74,5 +72,4 @@
  : startswith?
  : lossy-compress
  : until
- : join
- }
+ : join}

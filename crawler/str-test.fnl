@@ -1,21 +1,21 @@
-(local test (require :test-utils))
+(local is (require :is))
 
 (local str (require :str))
 
 (fn test-replace
   []
-  (test.not-nil? (str.replace :c :a :abc))
-  (test.eq? :aba (str.replace :c :a :abc))
-  (test.eq? :abada (str.replace :c :a :abcdc)))
+  (is.not-nil? (str.replace :c :a :abc))
+  (is.eq? :aba (str.replace :c :a :abc))
+  (is.eq? :abada (str.replace :c :a :abcdc)))
 
 
 (fn test-join
   []
-  (test.not-nil? (str.join "" [:a :b]))
-  (test.eq? :ab (str.join "" [:a :b]))
-  (test.eq? "a b" (str.join " " [:a :b]))
-  (test.eq? "" (str.join "" []))
-  (test.eq? "" (str.join :a [])))
+  (is.not-nil? (str.join "" [:a :b]))
+  (is.eq? :ab (str.join "" [:a :b]))
+  (is.eq? "a b" (str.join " " [:a :b]))
+  (is.eq? "" (str.join "" []))
+  (is.eq? "" (str.join :a [])))
 
 
 {: test-replace

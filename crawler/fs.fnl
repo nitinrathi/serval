@@ -41,4 +41,4 @@
 {: mkdir
  : touch
  : write
- : read }
+ : read}

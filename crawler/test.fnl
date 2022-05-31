@@ -1,7 +1,7 @@
 (local fennel (require :fennel))
 (local str (require :str))
 (local {: pnp->> } (require :utils))
-(local {: keys : filter : map } (require :fume))
+(local {: keys : filter : map} (require :fume))
 
 (local str-test (require :str-test))
 (local html-test (require :html-test))

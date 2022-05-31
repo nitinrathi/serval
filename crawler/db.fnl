@@ -1,13 +1,6 @@
 (local sqlite (require :lsqlite3complete))
-(local store {})
 
-(fn _set
-  [key value]
-  (tset store key value))
-
-(fn _get
-  [key]
-  (. store key))
+(var db-connection nil)
 
 (fn test []
   (let [db  (sqlite.open_memory)]
@@ -16,10 +9,14 @@
 
 (fn init
   [db-file]
-  (sqlite.open db-file))
+  (set db-connection (sqlite.open db-file))
+  db-connection)
 
+(fn close
+  []
+  (db-connection:close)
+  :closed)
 
-{:set _set
- :get _get
- : init
+{: init
+ : close
  : test}

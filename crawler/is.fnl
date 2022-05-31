@@ -1,5 +1,5 @@
 (local {: view} (require :fennel))
-(local {: falsey? : nil? } (require :fume))
+(local {: falsey? : nil?} (require :fume))
 
 (fn eq?
   [left right]
@@ -33,9 +33,7 @@
   (if (not (= "string" (type x)))
       (assert (values nil (.. :test-failed " expected string")))))
 
-{
- : eq?
+{: eq?
  : nil?
  : not-nil?
- : string?
- }
+ : string?}

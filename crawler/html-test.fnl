@@ -1,4 +1,4 @@
-(local test (require :test-utils))
+(local is (require :is))
 (local fs (require :fs))
 (local utils (require :utils))
 
@@ -21,24 +21,23 @@
 
 (fn test-title
   []
-  (test.not-nil? (title content))
-  (test.string? (title content))
-  (test.eq? "Good title" (title content)))
+  (is.not-nil? (title content))
+  (is.string? (title content))
+  (is.eq? "Good title" (title content)))
 
 (fn test-links
   []
-  (test.not-nil? (links content))
-  (test.eq? ["https://www.example1.com/"
+  (is.not-nil? (links content))
+  (is.eq? ["https://www.example1.com/"
              "https://www.example2.com/"]
             (links content)))
 
 (fn test-text
   []
-  (test.not-nil? (text content))
-  (test.string? (text content))
-  (test.eq? "Good link 1 Good link 2 " (text content)))
+  (is.not-nil? (text content))
+  (is.string? (text content))
+  (is.eq? "Good link 1 Good link 2 " (text content)))
 
 {: test-title
  : test-links
- : test-text
- }
+ : test-text}

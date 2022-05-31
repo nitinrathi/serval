@@ -1,7 +1,6 @@
 (local {: pprint } (require :utils))
 
 (fn curry1
-  ;; not implemented
   [f]
   (fn [x]
     (f [x])))
@@ -17,9 +16,9 @@
   [f]
   (fn [x y z]
     (match [x y z]
-     [x nil nil] (curry2 (fn [y z] (f x y z))) 
-     [x y nil] (fn [z] (f x y z)) 
-     [x y z] (f x y z))))
+      [x nil nil] (curry2 (fn [y z] (f x y z)))
+      [x y nil] (fn [z] (f x y z))
+      [x y z] (f x y z))))
 
 (fn curry
   [n f]
@@ -37,8 +36,6 @@
   (. x 1))
 
 (local head first)
-
-
 
 (fn keys
   [x]
@@ -113,22 +110,20 @@
     (keys _set)))
 
 
-{
- : first
- : dec
- : inc
- : head
- : identity
- : items
+{: always
  : complement
- : keys
- : map
- : filter
- : always
- : unique
- : nil?
+ : curry
+ : dec
  : false?
  : falsey?
- : curry
- }
+ : filter
+ : first
+ : head
+ : identity
+ : inc
+ : items
+ : keys
+ : map
+ : nil?
+ : unique}
 

@@ -1,4 +1,4 @@
-(local {: view } (require :fennel))
+(local {: view} (require :fennel))
 
 (fn pprint
   [...]
@@ -36,5 +36,4 @@
  : pnp->
  : pnp->>
  : update-table
- : update-table-on
- }
+ : update-table-on}
