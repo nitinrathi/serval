@@ -8,12 +8,12 @@ luarocks --tree lua_modules install Lua-cURL CURL_INCDIR=/usr/include/x86_64-lin
 
 ### Run
 ```bash
-fennel -l ini.fnl main.fnl
+make run
 ```
 
 ### Test
 ```bash
-fennel -l ini.fnl tests.fnl
+make test
 ```
 
 Few Resources and References
