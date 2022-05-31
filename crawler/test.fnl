@@ -24,7 +24,12 @@
 
 (local run-tests (map run-test))
 
-(run-tests [str-test
-            html-test
-            db-test
-            fs-test])
+(fn main
+  []
+  (run-tests [str-test
+              html-test
+              db-test
+              fs-test])
+  (print :tests-completed))
+
+(main)

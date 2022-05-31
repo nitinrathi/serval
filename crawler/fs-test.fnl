@@ -4,18 +4,24 @@
 
 (fn test-mkdir
   []
-  (is.not-nil? (fs.mkdir "/tmp/test-dir"))
-  (is.nil? (fs.mkdir "/test-dir"))
-  (is.eq? :dir-created (fs.mkdir "/tmp/test-dir-2")))
+  (is.not-nil? (fs.mkdir (fs.temp)))
+  (is.nil? (fs.mkdir "/test-dir-in-root"))
+  (is.eq? :dir-created (fs.mkdir (fs.temp))))
 
 (fn test-touch
   []
-  (fs.mkdir "/tmp/very-special-dir")
-  (is.nil? (fs.touch "/tmp/very-special-dir/asdasd/test-file.test-file"))
-  (is.not-nil? (fs.touch "/tmp/very-special-dir/test-file.test-file"))
-  (is.eq? :touched (fs.touch "/tmp/very-special-dir/test-file.test-file")))
+  (is.nil? (fs.touch "/test-file-in-root"))
+  (is.nil? (fs.touch (.. (fs.temp) "/temp-file")))
+  (is.not-nil? (fs.touch (fs.temp)))
+  (is.eq? :touched (fs.touch (fs.temp))))
+
+(fn test-temp
+  []
+  (is.not-nil? (fs.temp))
+  (is.string? (fs.temp)))
 
 {: test-mkdir
- : test-touch}
+ : test-touch
+ : test-temp}
 
 

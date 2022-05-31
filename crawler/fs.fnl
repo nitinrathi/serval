@@ -33,11 +33,18 @@
 
 (fn touch
   [path]
-  (match (run [:touch path])
+  (let [output (run [:touch path])]
+    (match output
       "" :touched
-      error (values nil error)))
+      _ (values nil _))))
+
+(fn temp
+  []
+  (run [:mktemp :-u]))
+
 
 {: mkdir
  : touch
+ : temp
  : write
  : read}
