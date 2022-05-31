@@ -1,8 +1,8 @@
-(local is (require :is))
-(local fs (require :fs))
-(local utils (require :utils))
+(local is (require :lib.is))
+(local fs (require :lib.fs))
+(local utils (require :lib.utils))
 
-(local html (require :html))
+(local html (require :lib.html))
 (local {: title
         : text
         : links

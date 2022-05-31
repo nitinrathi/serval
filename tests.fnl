@@ -1,12 +1,12 @@
 (local fennel (require :fennel))
-(local str (require :str))
-(local {: pnp->> } (require :utils))
-(local {: keys : filter : map} (require :fume))
+(local str (require :lib.str))
+(local {: pnp->> } (require :lib.utils))
+(local {: keys : filter : map} (require :lib.fume))
 
-(local str-test (require :str-test))
-(local html-test (require :html-test))
-(local db-test (require :db-test))
-(local fs-test (require :fs-test))
+(local str-test (require :lib.str-test))
+(local html-test (require :lib.html-test))
+(local db-test (require :lib.db-test))
+(local fs-test (require :lib.fs-test))
 
 (fn run-test
   [tests]

@@ -1,4 +1,4 @@
-(local {: pprint } (require :utils))
+(local {: pprint } (require :lib.utils))
 
 (fn curry1
   [f]

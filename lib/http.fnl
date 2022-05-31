@@ -1,8 +1,8 @@
 (local fennel (require :fennel))
-(local {: pprint} (require :utils))
+(local {: pprint} (require :lib.utils))
 (local curl (require :cURL))
-(local html (require :html))
-(local {: identity : first : keys : items : map} (require :fume))
+(local html (require :lib.html))
+(local {: identity : first : keys : items : map} (require :lib.fume))
 
 
 (fn GET [url]

@@ -1,4 +1,4 @@
-(local str (require :str))
+(local str (require :lib.str))
 
 (fn create-cmd-str
   [cmd]

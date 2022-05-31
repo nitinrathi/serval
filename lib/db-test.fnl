@@ -1,12 +1,13 @@
-(local is (require :is))
+(local is (require :lib.is))
+(local fs (require :lib.fs))
 (local fennel (require :fennel))
 
-(local db (require :db))
+(local db (require :lib.db))
 (local {: init} db)
 
 
 (fn test-init []
-  (let [db (init "test.db")]
+  (let [db (init (fs.temp))]
     (is.not-nil? db)
     (is.not-nil? db.exec)
     (db:exec "CREATE TABLE numbers(num1, num2);")))

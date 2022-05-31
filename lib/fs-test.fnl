@@ -1,6 +1,6 @@
-(local is (require :is))
+(local is (require :lib.is))
 
-(local fs (require :fs))
+(local fs (require :lib.fs))
 
 (fn test-mkdir
   []

@@ -1,18 +1,18 @@
-(local http (require :http))
+(local http (require :lib.http))
 (local fennel (require :fennel))
-(local html (require :html))
-(local neturl (require :neturl))
-(local fs (require :fs))
-(local db (require :db))
+(local html (require :lib.html))
+(local neturl (require :lib.neturl))
+(local fs (require :lib.fs))
+(local db (require :lib.db))
 (local sqlite (require :lsqlite3complete))
-(local str (require :str))
+(local str (require :lib.str))
 (local {: pnp 
         : pnp->
         : pnp->>
         : pprint 
         : update-table
         : update-table-on
-        } (require :utils))
+        } (require :lib.utils))
 (local {: complement 
         : map
         : dec
@@ -24,21 +24,7 @@
         : nil?
         : curry
         : always
-        } (require :fume))
-
-
-;(local url "https://en.wikipedia.org/wiki/Main_Page")
-(local url "http://lua-users.org/wiki/PatternsTutorial")
-
-(var content "")
-
-(if false
-  (do
-    (set content (http.GET url))
-    (fs.write "test.data" content))
-  (set content (fs.read "test.data")))
-
-;(pprint (html.text content))
+        } (require :lib.fume))
 
 (fn add-host-scheme
   [scheme host url]
@@ -106,7 +92,8 @@
        (rec-crawl link depth)))))
 
 (fn crawl-test []
-  (let [data (clean (crawl {:uri url}))]
+  (let [url "https://example.com"
+        data (clean (crawl {:uri url}))]
     (pprint data)))
 
 (fn db-test []
@@ -114,14 +101,18 @@
 
 (fn sha-test
   []
-  (let [sha2 (require :sha2)]
+  (let [sha2 (require :lib.sha2)]
     (print ( sha2.sha256 "abc"))))
 
 (fn main []
   ;(crawl-test)
   ;(db-test)
   ;(sha-test)
+  (print "does nothing.")
   )
 
+{: main
+ : crawl
+ : rec-crawl
+ : clean}
 
-(main)

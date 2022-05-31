@@ -4,7 +4,7 @@
         : dec
         : falsey?
         : curry
-        } (require :fume))
+        } (require :lib.fume))
 (local {
         : gsub
         : len

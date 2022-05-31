@@ -1,6 +1,6 @@
-(local is (require :is))
+(local is (require :lib.is))
 
-(local str (require :str))
+(local str (require :lib.str))
 
 (fn test-replace
   []

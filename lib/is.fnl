@@ -1,5 +1,5 @@
 (local {: view} (require :fennel))
-(local fume (require :fume))
+(local fume (require :lib.fume))
 
 (fn eq?
   [left right]
