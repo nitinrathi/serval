@@ -37,8 +37,8 @@
 (fn full-link
   [base uri]
   (let [base-uri (neturl.parse base)
-        scheme (. base-uri :scheme )
-        host (. base-uri :host )]
+        scheme (. base-uri :scheme)
+        host (. base-uri :host)]
     (add-host-scheme scheme host uri)))
 
 (fn extract
@@ -48,16 +48,16 @@
         title (html.title content)]
   {: text 
    : links
-   : title }))
+   : title}))
 
 (fn crawl
-  [{: uri }]
+  [{: uri}]
   (let [content          (http.GET uri)
         {: links : text} (extract content uri)]
-    {: text : links : uri }))
+    {: text : links : uri}))
 
 (fn clean-links
-  [{: links : text : uri : title }]
+  [{: links : text : uri : title}]
   (let [not-blank? (complement str.blank?)
         add-base-uri #(full-link uri $)
         until-hash (str.until "#")
@@ -65,14 +65,13 @@
                    (filter not-blank?)
                    (map add-base-uri)
                    (map until-hash)
-                   unique
-                   )]
-    {: links : text : uri : title }))
+                   unique)]
+    {: links : text : uri : title}))
 
 (fn clean-text
-  [{: links : text : uri : title }]
+  [{: links : text : uri : title}]
   (let [text (str.lossy-compress text)]
-    {: links : text : uri : title }))
+    {: links : text : uri : title}))
 
 
 (fn clean
@@ -91,12 +90,14 @@
      (each [_ link (ipairs (. data :links))]
        (rec-crawl link depth)))))
 
-(fn crawl-test []
+(fn crawl-test
+  []
   (let [url "https://example.com"
         data (clean (crawl {:uri url}))]
     (pprint data)))
 
-(fn db-test []
+(fn db-test
+  []
   (db.test))
 
 (fn sha-test
@@ -104,7 +105,8 @@
   (let [sha2 (require :lib.sha2)]
     (print ( sha2.sha256 "abc"))))
 
-(fn main []
+(fn main
+  []
   ;(crawl-test)
   ;(db-test)
   ;(sha-test)

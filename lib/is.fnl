@@ -10,7 +10,7 @@
                   [:table] (= (view left) (view right))
                   [:nil] (= left right)
                   _ false)]
-    (if (fume.falsey? matches?)
+    (when (fume.falsey? matches?)
       (assert (values nil (.. :test-failed
                               " expected "
                               (tostring left)
@@ -20,20 +20,33 @@
 
 (fn not-nil?
   [x] 
-  (if (fume.nil? x)
+  (when (fume.nil? x)
       (assert (values nil (.. :test-failed " expected not nil")))))
 
 (fn nil?
   [x]
-  (if (not (fume.nil? x))
+  (when (not (fume.nil? x))
       (assert (values nil (.. :test-failed " expected nil")))))
 
-(fn string?
-  [x]
-  (if (not (= "string" (type x)))
-      (assert (values nil (.. :test-failed " expected string")))))
+(fn _type?
+  [type-value x]
+  (when (not (= type-value (type x)))
+    (assert (values nil (.. :test-failed " expected " type-value)))))
+
+(local type? (fume.curry 2 _type?))
+
+(local fn? (type? :function))
+
+(local string? (type? :string))
+
+(local number? (type? :number))
+
+(local table? (type? :table))
 
 {: eq?
  : nil?
  : not-nil?
- : string?}
+ : string?
+ : fn?
+ : number?
+ : table?}
