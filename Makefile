@@ -7,4 +7,6 @@ dev :
 run :
 	fennel -l ini.fnl main.fnl
 
-.PHONY: test dev run
+run-dev :
+	nodemon --exec fennel -l ini.fnl main.fnl
+.PHONY: test dev run run-dev

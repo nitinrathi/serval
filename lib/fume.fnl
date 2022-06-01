@@ -20,12 +20,22 @@
       [x y nil] (fn [z] (f x y z))
       [x y z] (f x y z))))
 
+(lambda curry4
+  [f]
+  (fn [w x y z]
+    (match [w x y z]
+      [w nil nil nil] (curry3 (fn [x y z] (f w x y z)))
+      [w x nil nil] (curry2 (fn [y z] (f w x y z)))
+      [w x y nil] (fn [z] (f w x y z))
+      [w x y z] (f w x y z))))
+
 (fn curry
   [n f]
   (match n
     1 (curry1 f)
     2 (curry2 f)
-    3 (curry3 f)))
+    3 (curry3 f)
+    4 (curry4 f)))
 
 (fn identity
   [x]

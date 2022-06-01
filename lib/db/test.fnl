@@ -7,7 +7,7 @@
 
 
 (fn test-init []
-  (let [db (init (fs.temp))]
+  (let [db (init (fs.temp) [])]
     (is.not-nil? db)
     (is.not-nil? db.exec)
     (is.fn? db.exec)

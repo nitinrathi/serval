@@ -1,16 +1,19 @@
+(local fume (require :lib.fume))
 (local sqlite (require :lsqlite3complete))
 
 (var db-connection nil)
 
-(fn test []
-  (let [db  (sqlite.open_memory)]
-    (print db)
-    (assert (db:exec "CREATE TABLE test (col1, col2)"))))
-
 (fn init
-  [db-file]
+  [db-file queries]
+  (assert db-file)
+  (assert queries)
   (set db-connection (sqlite.open db-file))
+  (fume.map db-connection.exec queries)
   db-connection)
+
+(fn add-url
+  [uri data]
+  )
 
 (fn close
   []
@@ -18,5 +21,4 @@
   :closed)
 
 {: init
- : close
- : test}
+ : close}

@@ -15,8 +15,7 @@
                               " expected "
                               (tostring left)
                               " == "
-                              (tostring right)
-                              ))))))
+                              (tostring right)))))))
 
 (fn not-nil?
   [x] 
