@@ -3,10 +3,10 @@
 (local {: pnp->> } (require :lib.utils))
 (local {: keys : filter : map} (require :lib.fume))
 
-(local str-test (require :lib.str-test))
-(local html-test (require :lib.html-test))
-(local db-test (require :lib.db-test))
-(local fs-test (require :lib.fs-test))
+(local str-test (require :lib.str.test))
+(local html-test (require :lib.html.test))
+(local db-test (require :lib.db.test))
+(local fs-test (require :lib.fs.test))
 
 (fn run-test
   [tests]
