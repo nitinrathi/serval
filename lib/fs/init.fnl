@@ -33,10 +33,9 @@
 
 (fn touch
   [path]
-  (let [output (run [:touch path])]
-    (match output
+  (match (run [:touch path])
       "" :touched
-      _ (values nil _))))
+      _ (values nil _)))
 
 (fn temp
   []
