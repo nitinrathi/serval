@@ -10,6 +10,7 @@
         : len
         :find find-string
         :sub sub-string
+        : format
         } string)
 
 (local {:concat concat-table} table)
@@ -72,4 +73,5 @@
  : startswith?
  : lossy-compress
  : until
- : join}
+ : join
+ : format}
