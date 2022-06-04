@@ -139,22 +139,23 @@
 
 (fn eq-table?
   [left right]
-  (accumulate [result true
-               key value (pairs left)]
-    (and result
+  (accumulate [equal? true
+               key value (pairs left)
+               :until (not equal?)]
+    (and equal?
          (eq? (. left key) (. right key)))))
 
-(set eq? (fn
-           [left right]
-           (match [(type left) (type right)]
-             [:number :number] (= left right)
-             [:string :string] (= left right)
-             [:boolean :boolean] (= left right)
-             [:function :function] (= left right)
-             [:nil :nil] true
-             [:table :table] (eq-table? left right)
-             _ false)))
-
+(set eq?
+     (fn
+       [left right]
+       (match [(type left) (type right)]
+         [:number :number] (= left right)
+         [:string :string] (= left right)
+         [:boolean :boolean] (= left right)
+         [:function :function] (= left right)
+         [:nil :nil] true
+         [:table :table] (eq-table? left right)
+         _ false)))
 
 {: always
  : complement
