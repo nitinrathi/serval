@@ -3,19 +3,12 @@
 
 (fn eq?
   [left right]
-  (let [matches? (match [(type left) (type right)]
-                  [:number] (= left right)
-                  [:string] (= left right)
-                  [:boolean] (= left right)
-                  [:table] (= (view left) (view right))
-                  [:nil] (= left right)
-                  _ false)]
-    (when (fume.falsey? matches?)
+  (when (not (fume.eq? left right))
       (assert (values nil (.. :test-failed
                               " expected "
                               (tostring left)
                               " == "
-                              (tostring right)))))))
+                              (tostring right))))))
 
 (fn not-nil?
   [x] 
@@ -29,7 +22,7 @@
 
 (fn _type?
   [type-value x]
-  (when (not (= type-value (type x)))
+  (when (not (fume.type? type-value x))
     (assert (values nil (.. :test-failed " expected " type-value)))))
 
 (local type? (fume.curry 2 _type?))
@@ -42,10 +35,13 @@
 
 (local table? (type? :table))
 
+(local boolean? (type? :boolean))
+
 {: eq?
  : nil?
  : not-nil?
  : string?
  : fn?
  : number?
- : table?}
+ : table?
+ : boolean?}

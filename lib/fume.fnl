@@ -119,6 +119,71 @@
       (tset _set key true))
     (keys _set)))
 
+(fn _type?
+  [type-value x]
+  (= type-value (type x)))
+
+(local type? (curry 2 _type?))
+
+(local fn? (type? :function))
+
+(local string? (type? :string))
+
+(local number? (type? :number))
+
+(local table? (type? :table))
+
+(local boolean? (type? :boolean))
+
+(var eq? nil)
+
+(fn eq-number?
+  [left right]
+  (and (number? left)
+       (number? right)
+       (= left right)))
+
+(fn eq-string?
+  [left right]
+  (and (string? left)
+       (string? right)
+       (= left right)))
+
+(fn eq-boolean?
+  [left right]
+  (and (boolean? left)
+       (boolean? right)
+       (= left right)))
+
+(fn eq-fn?
+  [left right]
+  (and (fn? left)
+       (fn? right)
+       (= left right)))
+
+(fn eq-nil?
+  [left right]
+  (= left right nil))
+
+
+(fn eq-table?
+  [left right]
+  (accumulate [result (= (type left) (type right) :table)
+               key value (pairs left)]
+    (and result
+         (eq? (. left key) (. right key)))))
+
+(set eq? (fn
+           [left right]
+           (match (type left)
+             :number (eq-number? left right)
+             :string (eq-string? left right)
+             :boolean (eq-boolean? left right)
+             :function (eq-fn? left right)
+             :nil (eq-nil? left right)
+             :table (eq-table? left right)
+             _ false)))
+
 
 {: always
  : complement
@@ -135,5 +200,12 @@
  : keys
  : map
  : nil?
- : unique}
+ : unique
+ : type?
+ : fn?
+ : string?
+ : number?
+ : table?
+ : boolean?
+ : eq?}
 
