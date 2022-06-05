@@ -7,6 +7,7 @@
 (local html-test (require :lib.html.test))
 (local db-test (require :lib.db.test))
 (local fs-test (require :lib.fs.test))
+(local fume-test (require :lib.fume.test))
 
 (fn run-test
   [tests]
@@ -29,7 +30,8 @@
   (run-tests [str-test
               html-test
               db-test
-              fs-test])
+              fs-test
+              fume-test])
   (print :tests-completed))
 
 (main)

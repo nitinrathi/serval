@@ -37,11 +37,24 @@
 
 (local boolean? (type? :boolean))
 
+
+(fn true?
+  [x]
+  (when (not (fume.true? x))
+    (assert (values nil (.. :test-failed " expected true")))))
+
+(fn false?
+  [x]
+  (when (not (fume.false? x))
+    (assert (values nil (.. :test-failed " expected true")))))
+
 {: eq?
  : nil?
  : not-nil?
  : string?
  : fn?
  : number?
+ : true?
+ : false?
  : table?
  : boolean?}

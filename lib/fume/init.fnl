@@ -61,6 +61,9 @@
       (table.insert _items item))
     _items))
 
+(fn true?
+  [x]
+  (= true x))
 
 (fn false?
   [x]
@@ -68,7 +71,7 @@
 
 (fn nil?
   [x]
-  (= x nil))
+  (= nil x))
 
 (fn falsey?
   [x]
@@ -161,8 +164,10 @@
  : complement
  : curry
  : dec
+ : true?
  : false?
  : falsey?
+ : nil?
  : filter
  : first
  : head
@@ -171,7 +176,6 @@
  : items
  : keys
  : map
- : nil?
  : unique
  : type?
  : fn?
