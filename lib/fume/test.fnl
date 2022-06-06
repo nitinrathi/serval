@@ -17,5 +17,26 @@
     (is.false? (fume.eq? f g))
     (is.true? (fume.eq? f h))))
 
+(fn test-boolean?
+  []
+  (is.true? (fume.boolean? true))
+  (is.true? (fume.boolean? false))
+  (is.false? (fume.boolean? {}))
+  (is.false? (fume.boolean? []))
+  (is.false? (fume.boolean? "true"))
+  (is.false? (fume.boolean? 1))
+  (is.false? (fume.boolean? (fn [] []))))
 
-{: test-eq?}
+(fn test-table?
+  []
+  (is.true? (fume.table? []))
+  (is.true? (fume.table? {:key :value}))
+  (is.false? (fume.table? true))
+  (is.false? (fume.table? 1))
+  (is.false? (fume.table? "true"))
+  (is.false? (fume.table? "table"))
+  (is.false? (fume.table? (fn [] []))))
+
+{: test-eq?
+ : test-table?
+ : test-boolean?}
