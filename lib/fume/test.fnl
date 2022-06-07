@@ -42,6 +42,7 @@
   (is.true? (fume.number? 1))
   (is.true? (fume.number? 1.2))
   (is.false? (fume.number? "1.2"))
+  (is.false? (fume.number? true))
   (is.false? (fume.number? []))
   (is.false? (fume.number? {}))
   (is.false? (fume.number? {:number 1}))
@@ -53,14 +54,45 @@
   (is.true? (fume.string? "string"))
   (is.true? (fume.string? ""))
   (is.true? (fume.string? " "))
+  (is.false? (fume.string? true))
   (is.false? (fume.string? 1))
   (is.false? (fume.string? []))
   (is.false? (fume.string? {}))
   (is.false? (fume.string? {:string :str}))
   (is.false? (fume.string? (fn [] []))))
 
+(fn test-fn?
+  []
+  (is.true? (fume.fn? print))
+  (is.true? (fume.fn? fume.fn?))
+  (is.true? (fume.fn? (fn [] []))) 
+  (is.false? (fume.fn? true))
+  (is.false? (fume.fn? 1))
+  (is.false? (fume.fn? []))
+  (is.false? (fume.fn? {}))
+  (is.false? (fume.fn? {:string :str})))
+
+(fn test-type?
+  []
+  (is.true? (fume.fn? (fume.type? :string)))
+  (is.true? (fume.type? :string " "))
+  (is.false? (fume.type? :string true))
+  (is.true? (fume.type? :number 1))
+  (is.false? (fume.type? :number "1"))
+  (is.false? (fume.type? :number {}))
+  (is.true? (fume.type? :boolean false))
+  (is.false? (fume.type? :boolean {}))
+  (is.true? (fume.type? :table {}))
+  (is.true? (fume.type? :table []))
+  (is.false? (fume.type? :table :table))
+  (is.true? (fume.type? :function fume.type?))
+  (is.false? (fume.type? :function :table)))
+
+
 {: test-eq?
  : test-table?
  : test-boolean?
  : test-number?
- : test-string?}
+ : test-string?
+ : test-fn?
+ : test-type? }
