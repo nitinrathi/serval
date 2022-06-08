@@ -118,7 +118,7 @@
   (is.fn? (fume.always true))
   (is.eq? true ((fume.always true)))
   (is.eq? 1 ((fume.always 1) :a :b)))
-  (is.eq? [] ((fume.always []) :a)) 
+  (is.eq? [] ((fume.always []) :a))
 
 {: test-eq?
  : test-table?
