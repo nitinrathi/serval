@@ -160,6 +160,15 @@
          [:table :table] (eq-table? left right)
          _ false)))
 
+
+(fn sort
+  [list f]
+  (let [tbl []]
+    (each [_ value (pairs list)]
+      (table.insert tbl value))
+    (table.sort tbl f)
+    tbl))
+
 {: always
  : complement
  : curry
@@ -183,5 +192,7 @@
  : number?
  : table?
  : boolean?
- : eq?}
+ : eq?
+ : sort
+ }
 

@@ -1,4 +1,5 @@
 (local is (require :lib.is))
+(local fennel (require :fennel))
 
 (local fume (require :lib.fume))
 
@@ -88,6 +89,19 @@
   (is.true? (fume.type? :function fume.type?))
   (is.false? (fume.type? :function :table)))
 
+(fn test-unique
+  []
+  (is.eq? [1 2 3 4] (fume.unique [1 2 2 3 4]))
+  (is.eq? [1 2 3 5 6] (fume.unique [1 2 1 2 1 3 2 5 6]))
+  (is.eq? [:a :b :c :d] (fume.sort (fume.unique [:a :b :c :d :d])))
+  (is.eq? [] (fume.unique [])))
+
+(fn test-sort
+  []
+  (is.eq? [1 2 3 4] (fume.sort [4 3 1 2]))
+  (is.eq? [:a :b :c :d] (fume.sort [:b :c :a :d]))
+  (is.eq? [-2 -1 0 1 2] (fume.sort [0 1 2 -1 -2]))
+  (is.eq? [4 2 1] (fume.sort [1 2 4] (fn [x y] (> x y)))))
 
 {: test-eq?
  : test-table?
@@ -95,4 +109,6 @@
  : test-number?
  : test-string?
  : test-fn?
- : test-type? }
+ : test-type?
+ : test-unique
+ : test-sort}
