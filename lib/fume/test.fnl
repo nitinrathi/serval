@@ -103,6 +103,23 @@
   (is.eq? [-2 -1 0 1 2] (fume.sort [0 1 2 -1 -2]))
   (is.eq? [4 2 1] (fume.sort [1 2 4] (fn [x y] (> x y)))))
 
+(fn test-dec
+  []
+  (is.eq? -1 (fume.dec 0))
+  (is.eq? 0 (fume.dec 1)))
+
+(fn test-inc
+  []
+  (is.eq? 1 (fume.inc 0)))
+  (is.eq? 100 (fume.inc 99))
+
+(fn test-always
+  []
+  (is.fn? (fume.always true))
+  (is.eq? true ((fume.always true)))
+  (is.eq? 1 ((fume.always 1) :a :b)))
+  (is.eq? [] ((fume.always []) :a)) 
+
 {: test-eq?
  : test-table?
  : test-boolean?
@@ -111,4 +128,6 @@
  : test-fn?
  : test-type?
  : test-unique
- : test-sort}
+ : test-sort
+ : test-dec
+ : test-inc}
