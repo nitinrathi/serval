@@ -17,6 +17,14 @@
   (is.eq? "" (str.join "" []))
   (is.eq? "" (str.join :a [])))
 
+(fn test-find
+  []
+  (is.nil? (str.find :d :abc))
+  (is.not-nil? (str.find :a :abc))
+  (is.eq? 1 (str.find :a :abc))
+  (is.eq? 2 (str.find :b :abc))
+  (is.eq? 2 (str.find :bc :abc)))
 
 {: test-replace
- : test-join}
+ : test-join
+ : test-find }
