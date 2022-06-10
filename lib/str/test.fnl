@@ -33,7 +33,16 @@
   (is.eq? :aabccdef (str.replace :b :abc :abcdef))
   (is.eq? :aabcdef (str.replace :bc :abc :abcdef)))
 
+(fn test-len
+  []
+  (is.not-nil? (str.len ""))
+  (is.eq? 0 (str.len ""))
+  (is.eq? 1 (str.len :a))
+  (is.eq? 12 (str.len "Hello world!")))
+
 {: test-replace
  : test-join
  : test-find
- : test-replace }
+ : test-replace
+ : test-len}
+
