@@ -1,4 +1,4 @@
-#### requirements
+#### Requirements
 * [lua](https://www.lua.org)
 * [luarocks](https://luarocks.org)
 * [nodemon](https://www.npmjs.com/package//nodemon)
