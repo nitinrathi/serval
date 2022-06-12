@@ -8,13 +8,15 @@
 (local db-test (require :lib.db.test))
 (local fs-test (require :lib.fs.test))
 (local fume-test (require :lib.fume.test))
+(local config-test (require :lib.config.test))
 
 (fn run-test
   [tests]
-  (let [filter-test-fns (fn [prefix tests]
-                          (->> tests
-                               keys
-                               (filter (str.startswith? prefix))))
+  (let [filter-test-fns
+        (fn [prefix tests]
+          (->> tests
+               keys
+               (filter (str.startswith? prefix))))
         test-fns (filter-test-fns :test- tests)
         only-fns (filter-test-fns :only- tests)
         fns (match (length only-fns)
@@ -31,7 +33,8 @@
               html-test
               db-test
               fs-test
-              fume-test])
+              fume-test
+              config-test])
   (print :tests-completed))
 
 (main)
