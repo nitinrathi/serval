@@ -1,0 +1,4 @@
+{
+    "db-location": "data/db.sqlite3",
+    "tables": ["CREATE TABLE IF NOT EXISTS crawling (link, link_hash, data_hash);"]
+}

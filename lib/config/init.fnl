@@ -15,7 +15,17 @@
   [key value]
   (tset config key value))
 
+(fn all
+  []
+  config)
+
+(fn reset
+  []
+  (set config {}))
+
 {: init
+ : all
+ : reset
  :get _get
  :set _set}
 
