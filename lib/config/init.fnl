@@ -1,7 +1,7 @@
 (local json (require :lib.dkjson))
 (local fs (require :lib.fs))
 
-(var config {})
+(var config nil)
 
 (fn init
   [config-file]
@@ -21,7 +21,7 @@
 
 (fn reset
   []
-  (set config {}))
+  (set config nil))
 
 {: init
  : all
