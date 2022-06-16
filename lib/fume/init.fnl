@@ -1,5 +1,3 @@
-(local {: pprint } (require :lib.utils))
-
 (fn curry1
   [f]
   (fn [x]
@@ -169,6 +167,13 @@
     (table.sort tbl f)
     tbl))
 
+(fn len
+  [x]
+  (match (type x)
+    :table (# (keys x))
+    :string (string.len x)
+    _ nil))
+
 {: always
  : complement
  : curry
@@ -194,5 +199,4 @@
  : boolean?
  : eq?
  : sort
- }
-
+ : len}
