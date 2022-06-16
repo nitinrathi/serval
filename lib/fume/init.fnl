@@ -59,6 +59,13 @@
       (table.insert _items item))
     _items))
 
+(fn len
+  [x]
+  (match (type x)
+    :table (# (keys x))
+    :string (string.len x)
+    _ nil))
+
 (fn true?
   [x]
   (= true x))
@@ -141,7 +148,10 @@
 (fn eq-table?
   [left right]
   (accumulate [equal? true
-               key value (pairs left)
+               key value (pairs (if (> (len (keys left))
+                                       (len (keys right)))
+                                  left
+                                  right))
                :until (not equal?)]
     (and equal?
          (eq? (. left key) (. right key)))))
@@ -167,12 +177,6 @@
     (table.sort tbl f)
     tbl))
 
-(fn len
-  [x]
-  (match (type x)
-    :table (# (keys x))
-    :string (string.len x)
-    _ nil))
 
 {: always
  : complement

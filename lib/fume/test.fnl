@@ -12,6 +12,7 @@
   (is.true? (fume.eq? {:foo :bar} {:foo "bar"}))
   (is.true? (fume.eq? {:foo {:bar 2}} {:foo {:bar 2}}))
   (is.true? (fume.eq? {:foo 1 :bar 2} {:bar 2 :foo 1}))
+  (is.false? (fume.eq? {:foo 1 :bar 2} {:bar 2 :foo 1 :x 1}))
   (let [f (fn [] 1)
         g (fn [] 1)
         h f]
@@ -120,6 +121,19 @@
   (is.eq? 1 ((fume.always 1) :a :b)))
   (is.eq? [] ((fume.always []) :a))
 
+
+(fn test-len
+  []
+  (is.not-nil? (fume.len []))
+  (is.eq? 0 (fume.len []))
+  (is.eq? 3 (fume.len [:a :b :c]))
+  (is.eq? 0 (fume.len {}))
+  (is.eq? 1 (fume.len {:a :a}))
+  (is.eq? 3 (fume.len :abc))
+  (is.eq? 0 (fume.len ""))
+  (is.nil? (fume.len fume.len))
+  (is.nil? (fume.len 0)))
+
 {: test-eq?
  : test-table?
  : test-boolean?
@@ -130,4 +144,7 @@
  : test-unique
  : test-sort
  : test-dec
- : test-inc}
+ : test-inc
+ : test-len}
+
+
