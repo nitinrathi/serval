@@ -80,41 +80,7 @@
       clean-links
       clean-text))
 
-(lambda rec-crawl
-  [uri depth]
-  (let [depth (dec (or depth 3))
-        data  (-> {: uri }
-                  crawl
-                  clean)]
-    (if (> depth 0)
-     (each [_ link (ipairs (. data :links))]
-       (rec-crawl link depth)))))
 
-(fn crawl-test
-  []
-  (let [url "https://example.com"
-        data (clean (crawl {:uri url}))]
-    (pprint data)))
-
-(fn db-test
-  []
-  (db.test))
-
-(fn sha-test
-  []
-  (let [sha2 (require :lib.sha2)]
-    (print ( sha2.sha256 "abc"))))
-
-(fn main
-  []
-  ;(crawl-test)
-  ;(db-test)
-  ;(sha-test)
-  (print "does nothing.")
-  )
-
-{: main
- : crawl
- : rec-crawl
+{: crawl
  : clean}
 
