@@ -14,7 +14,6 @@
                   "CREATE UNIQUE INDEX index_key on "
                   namespace
                   " (key);")]
-
     (assert (db-conn:exec query))))
 
 (fn init
@@ -40,6 +39,14 @@
         (: :step)
         (: :reset)))
 
+(fn delete-statement
+  [namespace key]
+  (str.format "DELETE from %s where key = '%s';" namespace key))
+
+(fn delete
+  [namespace key]
+  (assert (db-conn:exec (delete-statement namespace key))))
+
 (fn set*
   [namespace key value]
   (assert (fume.string? namespace))
@@ -49,7 +56,14 @@
 
 (fn get*
   [namespace key]
-  key)
+  (var r nil)
+  (each [row (db-conn:nrows (.. "SELECT value from "
+                                namespace
+                                " where key = '"
+                                key
+                                "';"))]
+    (set r (. row :value)))
+  (and r (json.decode r)))
 
 (fn close
   []
@@ -59,4 +73,5 @@
 {: init
  :get get*
  :set set*
+ :unset delete
  : close}

@@ -27,6 +27,7 @@
         text-sha (sha256 text)
         file-name (.. (config.get :repository) text-sha)]
     (db.set :links uri {: uri : links : text-sha })
+    (db.set :repo uri file-name)
     (fs.write file-name text)))
 
 (lambda rec-crawl

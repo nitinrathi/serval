@@ -1,8 +1,8 @@
 (local {: view} (require :fennel))
 
 (fn pprint
-  [...]
-  (print (view ...)))
+  [x]
+  (print (view x)))
 
 
 (fn pnp
