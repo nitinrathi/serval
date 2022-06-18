@@ -10,7 +10,7 @@
   [db-conn namespace]
   (let [query (.. (str.format 
                     "CREATE TABLE IF NOT EXISTS %s (key text, value text);"
-                    namespace namespace)
+                    namespace)
                   (str.format
                     "CREATE UNIQUE INDEX %s_index_key on %s (key);"
                     namespace namespace))]
