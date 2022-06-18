@@ -8,12 +8,12 @@
 
 (fn create-namespace
   [db-conn namespace]
-  (let [query (.. "CREATE TABLE IF NOT EXISTS "
-                  namespace
-                  " (key text, value text);"
-                  "CREATE UNIQUE INDEX index_key on "
-                  namespace
-                  " (key);")]
+  (let [query (.. (str.format 
+                    "CREATE TABLE IF NOT EXISTS %s (key text, value text);"
+                    namespace namespace)
+                  (str.format
+                    "CREATE UNIQUE INDEX %s_index_key on %s (key);"
+                    namespace namespace))]
     (assert (db-conn:exec query))))
 
 (fn init
@@ -57,11 +57,9 @@
 (fn get*
   [namespace key]
   (var r nil)
-  (each [row (db-conn:nrows (.. "SELECT value from "
-                                namespace
-                                " where key = '"
-                                key
-                                "';"))]
+  (each [row (db-conn:nrows
+               (str.format
+                 "SELECT value from %s where key = '%s';" namespace key))]
     (set r (. row :value)))
   (and r (json.decode r)))
 
