@@ -15,7 +15,7 @@
   (config.init config-file)
   (print "init: db" (config.get :db-location))
   (db.init (config.get :db-location)
-           (config.get :tables))
+           (config.get :db-namespaces))
   (fs.mkdir (config.get :repository)))
 
 (fn write-data
@@ -26,7 +26,7 @@
         uri-sha (sha256 uri)
         text-sha (sha256 text)
         file-name (.. (config.get :repository) text-sha)]
-    (db.insert :crawling [uri uri-sha text-sha])
+    (db.set :links uri {: uri : links : text-sha })
     (fs.write file-name text)))
 
 (lambda rec-crawl
