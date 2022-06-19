@@ -9,7 +9,7 @@
 mkdir -p lua_modules
 luarocks --tree lua_modules install lsqlite3complete
 luarocks --tree lua_modules install gumbo
-luarocks --tree lua_modules install Lua-cURL CURL_INCDIR=/usr/include/x86_64-linux-gnu/
+luarocks --tree lua_modules install Lua-cURL # CURL_INCDIR=/usr/include/x86_64-linux-gnu/
 ```
 
 #### Run
