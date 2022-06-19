@@ -31,19 +31,19 @@
     (fs.write file-name text)))
 
 (lambda rec-crawl
-  [uri depth f]
+  [uri depth f link-filter]
   (let [depth (fume.dec (or depth 3))
         data  (-> {: uri }
                   crawler.crawl
                   crawler.clean)]
     (f data)
     (if (> depth 0)
-     (each [_ link (ipairs (. data :links))]
-       (rec-crawl link depth write-data)))))
+     (each [_ link (ipairs (fume.filter link-filter (. data :links)))]
+       (rec-crawl link depth f link-filter)))))
 
 (fn main
   []
   (init {: config-file})
-  (rec-crawl "https://example.com" 1 write-data))
+  (rec-crawl "https://example.com" 4 write-data fume.identity))
 
 (main)

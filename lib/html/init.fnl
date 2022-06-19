@@ -1,6 +1,7 @@
 (local gumbo (require :gumbo))
 (local {: parse } gumbo)
 (local {: first : map : keys } (require :lib.fume))
+(local fume (require :lib.fume))
 
 (fn hello
   []

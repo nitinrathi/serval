@@ -52,6 +52,7 @@
 
 (fn crawl
   [{: uri}]
+  (print "crawler.crawl: uri" uri)
   (let [content          (http.GET uri)
         {: links : text} (extract content uri)]
     {: text : links : uri}))
