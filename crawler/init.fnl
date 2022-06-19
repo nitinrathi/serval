@@ -6,6 +6,7 @@
 (local db (require :lib.db))
 (local sqlite (require :lsqlite3complete))
 (local str (require :lib.str))
+(local puremagic (require :lib.puremagic))
 (local {: pnp 
         : pnp->
         : pnp->>
@@ -41,21 +42,40 @@
         host (. base-uri :host)]
     (add-host-scheme scheme host uri)))
 
-(fn extract
+(fn mime-type
+  [content]
+  (puremagic.via_content content ""))
+
+(fn extract-html
   [content]
   (let [text (html.text content)
         links (html.links content)
         title (html.title content)]
-  {: text 
-   : links
-   : title}))
+    {: text 
+     : links
+     : title}))
+
+(fn extract-plain-text
+  [content]
+  {:text content
+   :links []
+   :title ""})
+
+(fn extract
+  [content]
+  (print "crawler.extract: mime-type" (mime-type content))
+  (match (mime-type content)
+    :text/html (extract-html content)
+    :text/plain (extract-plain-text content)
+    _ {:text "" :links [] :title ""}))
+
 
 (fn crawl
   [{: uri}]
   (print "crawler.crawl: uri" uri)
   (let [content          (http.GET uri)
-        {: links : text} (extract content uri)]
-    {: text : links : uri}))
+        {: links : text : title } (extract content uri)]
+    {: text : links : uri : title}))
 
 (fn clean-links
   [{: links : text : uri : title}]

@@ -23,10 +23,11 @@
   (let [uri (. data :uri)
         text (. data :text)
         links (. data :links)
+        title (. data :title)
         uri-sha (sha256 uri)
         text-sha (sha256 text)
         file-name (.. (config.get :repository) text-sha)]
-    (db.set :links uri {: uri : links : text-sha })
+    (db.set :links uri {: uri : links : text-sha : title})
     (db.set :repo uri file-name)
     (fs.write file-name text)))
 
