@@ -63,6 +63,15 @@
     (set r (. row :value)))
   (and r (json.decode r)))
 
+(fn has?
+  [namespace key]
+  (var r nil)
+  (each [row (db-conn:nrows
+               (str.format
+                 "SELECT key from %s where key = '%s';" namespace key))]
+    (set r (. row :key)))
+  (not (not r)))
+
 (fn close
   []
   (db-conn:close)
@@ -72,4 +81,5 @@
  :get get*
  :set set*
  :unset delete
+ : has?
  : close}

@@ -5,9 +5,6 @@ dev :
 	nodemon --exec fennel -l ini.fnl tests.fnl
 
 run :
-	fennel -l ini.fnl main.fnl
+	fennel -l ini.fnl -e "((. (require :main) :main))"
 
-run-dev :
-	nodemon --exec fennel -l ini.fnl main.fnl
-
-.PHONY: test dev run run-dev
+.PHONY: test dev run

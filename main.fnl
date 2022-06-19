@@ -42,9 +42,20 @@
      (each [_ link (ipairs (fume.filter link-filter (. data :links)))]
        (rec-crawl link depth f link-filter)))))
 
+(fn crawled?
+  [link]
+  (let [has? (db.has? :links link)]
+    (print "has? " has? link)
+    (when has?
+      (print "already crawled" link))
+    (not has?)))
+
 (fn main
   []
   (init {: config-file})
-  (rec-crawl "https://example.com" 4 write-data fume.identity))
+  (rec-crawl "https://example.com" 4 write-data crawled?))
 
-(main)
+;(main)
+
+{: init 
+ : main}
