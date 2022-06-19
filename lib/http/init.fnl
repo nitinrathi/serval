@@ -10,7 +10,7 @@
     (with-open [h (curl.easy {:url url
                               :httpheader ["User-Agent: pse crawler 0.0.1"]
                               :followlocation true
-                              :verbose true
+                              ;:verbose true
                               :writefunction {:write #(table.insert response $2)}})]
       (h:perform))
     (table.concat response)))

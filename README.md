@@ -27,3 +27,4 @@ Few Resources and References
 * https://leafo.net/guides/customizing-the-luarocks-tree.html#quick-guide
 * https://openresty.org/en/using-luarocks.html
 * https://github.com/Egor-Skriptunoff/pure_lua_SHA
+* https://github.com/wbond/puremagic
