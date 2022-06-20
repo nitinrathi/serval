@@ -6,14 +6,16 @@
 (local fume (require :lib.fume))
 
 (fn GET [url]
-  (let [response []]
+  (let [body []
+        headers []]
     (with-open [h (curl.easy {:url url
                               :httpheader ["User-Agent: pse crawler 0.0.1"]
                               :followlocation true
-                              ;:verbose true
-                              :writefunction {:write #(table.insert response $2)}})]
+                              :headerfunction #(table.insert headers $)
+                              :writefunction {:write #(table.insert body $2)}})]
       (h:perform))
-    (table.concat response)))
+    {: headers
+     :body (table.concat body)}))
 
 
 {: GET}
