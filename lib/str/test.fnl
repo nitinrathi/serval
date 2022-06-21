@@ -40,9 +40,18 @@
   (is.eq? 1 (str.len :a))
   (is.eq? 12 (str.len "Hello world!")))
 
+(fn test-split
+  []
+  (is.not-nil? (str.split "," "11,22,33"))
+  (is.eq? ["11" "22" "33"] (str.split "," "11,22,33"))
+  (is.eq? ["11,22,33"] (str.split "r" "11,22,33")))
+
 {: test-replace
  : test-join
  : test-find
  : test-replace
- : test-len}
+ : test-len
+ : test-split}
+
+
 

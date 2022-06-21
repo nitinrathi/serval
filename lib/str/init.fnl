@@ -1,10 +1,12 @@
+(local fennel (require :fennel))
+(local fume (require :lib.fume))
 (local {: first
         : nil?
         : not-nil?
         : dec
         : falsey?
         : curry
-        } (require :lib.fume))
+        } fume)
 (local {
         : gsub
         : len
@@ -65,6 +67,22 @@
 
 (local join (curry  2 _join))
 
+
+(fn _split
+  [pattern str splits]
+  (let [start 0
+        splits (or splits [])
+        (split-start split-end) (find-string str pattern)]
+    (if split-start
+      (do
+        (table.insert splits (sub-string str start (dec split-start)))
+        (_split pattern (sub-string str (fume.inc split-end)) splits))
+      (do
+        (table.insert splits str)
+        splits))))
+
+(local split (curry 2 _split))
+
 {: blank?
  : find
  : replace
@@ -74,4 +92,6 @@
  : lossy-compress
  : until
  : join
- : format}
+ : format
+ : split
+ }
