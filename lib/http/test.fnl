@@ -1,10 +1,16 @@
-(local curl (require :cURL))
-(local json (require :dkjson))
+(local http-utils (require :lib.http.utils))
 
-(λ request [url]
-  (let [out []]
-    (with-open [h (curl.easy {:url url
-                              :httpheader ["User-Agent: Fennel example"]
-                              :writefunction {:write #(table.insert out $2)}})]
-      (h:perform))
-    (json.decode (table.concat out "\n"))))
+(local is (require :lib.is))
+
+(fn test-http-utils-parse-http-start-line
+  []
+  (is.not-nil? (http-utils.parse-http-start-line "HTTP/1.1 301 Moved Permanently"))
+  (is.eq? {:version {:major 1 :minor 1} :status 301 :message "Moved Permanently"}
+          (http-utils.parse-http-start-line "HTTP/1.1 301 Moved Permanently"))
+  (is.eq? {:version {:major 2} :status 301 :message "Moved Permanently"}
+          (http-utils.parse-http-start-line "HTTP/2 301 Moved Permanently"))
+  (is.eq? {:version {:major 2} :status 200 :message "OK"}
+          (http-utils.parse-http-start-line "HTTP/2 200 OK"))
+  )
+
+{: test-http-utils-parse-http-start-line}

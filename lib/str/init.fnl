@@ -72,7 +72,7 @@
   [pattern str splits]
   (let [start 0
         splits (or splits [])
-        (split-start split-end) (find-string str pattern)]
+        (split-start split-end) (find pattern str)]
     (if split-start
       (do
         (table.insert splits (sub-string str start (dec split-start)))

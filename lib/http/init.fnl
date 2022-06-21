@@ -2,8 +2,12 @@
 (local {: pprint} (require :lib.utils))
 (local curl (require :cURL))
 (local html (require :lib.html))
-(local {: identity : first : keys : items : map} (require :lib.fume))
+(local str (require :lib.str))
 (local fume (require :lib.fume))
+
+(fn parse-headers
+  [headers]
+  (fume.filter (fume.complement str.blank?) (str.split "\r\n" headers)))
 
 (fn GET [url]
   (let [body []
@@ -14,8 +18,7 @@
                               :headerfunction #(table.insert headers $)
                               :writefunction {:write #(table.insert body $2)}})]
       (h:perform))
-    {: headers
+    {:headers (parse-headers (table.concat headers))
      :body (table.concat body)}))
-
 
 {: GET}
