@@ -5,11 +5,11 @@
 (fn test-http-utils-parse-http-start-line
   []
   (is.not-nil? (http-utils.parse-http-start-line "HTTP/1.1 301 Moved Permanently"))
-  (is.eq? {:version {:major 1 :minor 1} :status 301 :message "Moved Permanently"}
+  (is.eq? {:protocal {:name :HTTP :major 1 :minor 1} :status 301 :message "Moved Permanently"}
           (http-utils.parse-http-start-line "HTTP/1.1 301 Moved Permanently"))
-  (is.eq? {:version {:major 2} :status 301 :message "Moved Permanently"}
+  (is.eq? {:protocal {:name :HTTP :major 2} :status 301 :message "Moved Permanently"}
           (http-utils.parse-http-start-line "HTTP/2 301 Moved Permanently"))
-  (is.eq? {:version {:major 2} :status 200 :message "OK"}
+  (is.eq? {:protocal {:name :HTTP :major 2} :status 200 :message "OK"}
           (http-utils.parse-http-start-line "HTTP/2 200 OK"))
   )
 

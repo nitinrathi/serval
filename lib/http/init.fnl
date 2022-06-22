@@ -19,6 +19,7 @@
                               :writefunction {:write #(table.insert body $2)}})]
       (h:perform))
     {:headers (parse-headers (table.concat headers))
+     :
      :body (table.concat body)}))
 
 {: GET}
