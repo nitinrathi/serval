@@ -1,9 +1,9 @@
 (local str (require :lib.str))
 
 (fn parse-http-start-line
-  [version-string]
+  [start-line]
   (let [pattern "(%a+)/(%d+)%.?(%d*)%s+(%d+)%s+(.+)"
-        (_ _ name major minor status message) (str.find pattern version-string)
+        (_ _ name major minor status message) (str.find pattern start-line)
         major (tonumber major)
         minor (tonumber minor)
         status (tonumber status)]
@@ -11,4 +11,12 @@
      : status
      : message}))
 
-{: parse-http-start-line}
+(fn parse-header-line
+  [header-line]
+  (let [pattern "(.+): (.+)"
+    (_ _ key value) (str.find pattern header-line)]
+    {key value}))
+
+{: parse-http-start-line
+ : parse-header-line
+ }

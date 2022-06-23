@@ -178,6 +178,15 @@
     tbl))
 
 
+(fn rest
+  [list]
+  (var first? true)
+  (let [_rest []]
+    (each [_ value (ipairs list)]
+      (if first? (set first? false)
+        :else (table.insert _rest value)))
+    _rest))
+
 {: always
  : complement
  : curry
@@ -203,4 +212,6 @@
  : boolean?
  : eq?
  : sort
- : len}
+ : len
+ : rest}
+

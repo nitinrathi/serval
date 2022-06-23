@@ -134,6 +134,11 @@
   (is.nil? (fume.len fume.len))
   (is.nil? (fume.len 0)))
 
+(fn test-rest
+  []
+  (is.not-nil? (fume.rest [1 2 3]))
+  (is.eq? [2 3] (fume.rest [1 2 3])))
+
 {: test-eq?
  : test-table?
  : test-boolean?
@@ -145,6 +150,7 @@
  : test-sort
  : test-dec
  : test-inc
- : test-len}
+ : test-len
+ : test-rest}
 
 
