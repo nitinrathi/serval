@@ -187,6 +187,14 @@
         :else (table.insert _rest value)))
     _rest))
 
+(fn merge
+  [...]
+  (let [merged {}]
+   (each [_ tbl (pairs [...])]
+    (each [key value (pairs tbl)]
+      (tset merged key value)))
+   merged))
+
 {: always
  : complement
  : curry
@@ -213,5 +221,6 @@
  : eq?
  : sort
  : len
- : rest}
+ : rest
+ : merge}
 

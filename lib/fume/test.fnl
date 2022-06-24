@@ -139,6 +139,15 @@
   (is.not-nil? (fume.rest [1 2 3]))
   (is.eq? [2 3] (fume.rest [1 2 3])))
 
+(fn test-merge
+  []
+  (is.not-nil? (fume.merge {:a 1} {:b 1}))
+  (is.eq? {:a 1 :b 1} (fume.merge {:a 1} {:b 1}))
+  (is.eq? {:b 1 :a 1} (fume.merge {:a 1} {:b 1}))
+  (is.eq? {} (fume.merge))
+  (is.eq? {:a 1} (fume.merge {:a 1}))
+  (is.eq? {:a 1 :b 2 :c 3} (fume.merge {:a 10 :b 10 :c 10} {:a 1} {:b 2} {:c 3})))
+
 {: test-eq?
  : test-table?
  : test-boolean?
@@ -151,6 +160,8 @@
  : test-dec
  : test-inc
  : test-len
- : test-rest}
+ : test-rest
+ : test-merge
+ }
 
 
