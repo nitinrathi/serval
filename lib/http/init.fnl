@@ -4,10 +4,18 @@
 (local html (require :lib.html))
 (local str (require :lib.str))
 (local fume (require :lib.fume))
+(local http-utils (require :lib.http.utils))
 
 (fn parse-headers
   [headers]
-  (fume.filter (fume.complement str.blank?) (str.split "\r\n" headers)))
+  (->> headers
+       (table.concat)
+       (str.split "\r\n")
+       (fume.filter (fume.complement str.blank?))
+       (fume.rest)
+       (fume.map http-utils.parse-header-line)
+       (table.unpack)
+       (fume.merge)))
 
 (fn GET [url]
   (let [body []
@@ -18,7 +26,7 @@
                               :headerfunction #(table.insert headers $)
                               :writefunction {:write #(table.insert body $2)}})]
       (h:perform))
-    {:headers (parse-headers (table.concat headers))
+    {:headers (parse-headers headers)
      :body (table.concat body)}))
 
 {: GET}
