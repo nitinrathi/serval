@@ -43,7 +43,9 @@
         parse
         (: :getElementsByTagName :title) 
         first
-        (. :innerHTML)))
+        (or {})
+        (. :innerHTML)
+        (or "")))
 
 
 {: title

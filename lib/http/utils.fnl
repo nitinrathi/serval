@@ -18,5 +18,4 @@
     {key value}))
 
 {: parse-http-start-line
- : parse-header-line
- }
+ : parse-header-line}

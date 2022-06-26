@@ -5,6 +5,7 @@
 (local str (require :lib.str))
 (local fume (require :lib.fume))
 (local http-utils (require :lib.http.utils))
+(local utils (require :lib.utils))
 
 (fn parse-headers
   [headers]
@@ -12,6 +13,7 @@
        (table.concat)
        (str.split "\r\n")
        (fume.filter (fume.complement str.blank?))
+       (fume.filter (str.find ":"))
        (fume.rest)
        (fume.map http-utils.parse-header-line)
        (table.unpack)
