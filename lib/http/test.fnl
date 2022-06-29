@@ -26,7 +26,7 @@
   (is.not-nil? (http-utils.parse-header-line "key: value"))
   (is.eq? {:key :value } (http-utils.parse-header-line "key: value"))
   (is.eq?
-    {:Content-Type "text/plain; charset=UTF-8"}
+    {:content-type "text/plain; charset=UTF-8"}
     (http-utils.parse-header-line "Content-Type: text/plain; charset=UTF-8")))
 
 {: test-http-utils-parse-http-start-line

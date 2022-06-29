@@ -1,14 +1,16 @@
 (local {: view} (require :fennel))
+(local fennel (require :fennel))
 (local fume (require :lib.fume))
+
 
 (fn eq?
   [left right]
   (when (not (fume.eq? left right))
       (assert (values nil (.. :test-failed
                               " expected "
-                              (tostring left)
+                              (fennel.view left)
                               " == "
-                              (tostring right))))))
+                              (fennel.view right))))))
 
 (fn not-nil?
   [x] 

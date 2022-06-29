@@ -15,7 +15,7 @@
   [header-line]
   (let [pattern "(.+): (.+)"
     (_ _ key value) (str.find pattern header-line)]
-    {key value}))
+    {(str.lower key) value}))
 
 {: parse-http-start-line
  : parse-header-line}

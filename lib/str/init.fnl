@@ -12,6 +12,8 @@
         : len
         :find find-string
         :sub sub-string
+        : lower
+        : upper
         : format
         } string)
 
@@ -94,4 +96,6 @@
  : join
  : format
  : split
+ : lower
+ : upper
  }
