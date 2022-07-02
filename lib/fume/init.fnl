@@ -195,6 +195,25 @@
       (tset merged key value)))
    merged))
 
+(local fennel (require :fennel))
+
+(fn _split
+  [on list]
+  (var split [])
+  (let [splits []]
+    (each [_ value (ipairs list)]
+      (if (not (eq? value on))
+        (table.insert split value)
+        (do
+          (if (< 0 (len split))
+            (table.insert splits split))
+          (set split []))))
+    (if (< 0 (len split))
+      (table.insert splits split))
+    splits))
+
+(local split (curry 2 _split))
+
 {: always
  : complement
  : curry
@@ -222,5 +241,8 @@
  : sort
  : len
  : rest
- : merge}
+ : merge
+ : split
+ }
+
 

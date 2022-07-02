@@ -148,6 +148,14 @@
   (is.eq? {:a 1} (fume.merge {:a 1}))
   (is.eq? {:a 1 :b 2 :c 3} (fume.merge {:a 10 :b 10 :c 10} {:a 1} {:b 2} {:c 3})))
 
+(fn test-split
+  []
+  (is.not-nil? (fume.split 1 [2 3 1 4 5 6]))
+  (is.eq? [[2 3] [4 5 6]] (fume.split 1 [2 3 1 4 5 6]))
+  (is.eq? [[2 3] [4 5 6]] (fume.split 1 [1 2 3 1 4 5 6]))
+  (is.eq? [[2 3] [4 5 6]] (fume.split 1 [1 2 3 1 4 5 6 1]))
+  (is.eq? [[2 3] [4 5 6]] (fume.split 1 [1 2 3 1 1 1 1 1 4 5 6 1])))
+
 {: test-eq?
  : test-table?
  : test-boolean?
@@ -162,6 +170,7 @@
  : test-len
  : test-rest
  : test-merge
+ : test-split
  }
 
 
