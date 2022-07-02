@@ -170,7 +170,6 @@
  : test-len
  : test-rest
  : test-merge
- : test-split
- }
+ : test-split}
 
 

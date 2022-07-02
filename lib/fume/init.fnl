@@ -153,18 +153,17 @@
                                   left
                                   right))
                :until (not equal?)]
-    (and equal?
-         (eq? (. left key) (. right key)))))
+    (eq? (. left key) (. right key))))
 
 (set eq?
      (fn
        [left right]
        (match [(type left) (type right)]
+         [:nil :nil] true
          [:number :number] (= left right)
          [:string :string] (= left right)
          [:boolean :boolean] (= left right)
          [:function :function] (= left right)
-         [:nil :nil] true
          [:table :table] (eq-table? left right)
          _ false)))
 
@@ -242,7 +241,6 @@
  : len
  : rest
  : merge
- : split
- }
+ : split}
 
 
