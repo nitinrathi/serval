@@ -8,19 +8,23 @@
 (local utils (require :lib.utils))
 
 (fn parse-headers
-  [headers]
-  (->> headers
+  [headers-str]
+  (->> headers-str
        (table.concat)
        (str.split "\r\n")
        (fume.split "")
        (fume.last)
-       (fume.filter (fume.complement str.blank?))
-       (fume.filter (str.find ":"))
-       (fume.rest)
-       (fume.map http-utils.parse-header-line)
-       (table.unpack)
-       (fume.merge)))
+       (http-utils.list->headers-table)))
 
+(fn redirections
+  [headers-str]
+  (->> headers-str
+       (table.concat)
+       (str.split "\r\n")
+       (fume.split "")
+       (fume.butlast)
+       (fume.map http-utils.list->headers-table)
+       (fume.map #(. $ :location))))
 
 (fn GET [url]
   (let [body []
@@ -32,6 +36,7 @@
                               :writefunction {:write #(table.insert body $2)}})]
       (h:perform))
     {:headers (parse-headers headers)
+     :redirections (redirections headers)
      :body (table.concat body)}))
 
 {: GET}

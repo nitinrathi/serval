@@ -49,6 +49,13 @@
   [x]
   (. x (# x)))
 
+(fn butlast
+  [x]
+  (let [_items []]
+    (each [index item (ipairs x) :until (= (# x) index)]
+      (table.insert _items item))
+    _items))
+
 (fn keys
   [x]
   (let [_keys []]
@@ -228,6 +235,7 @@
  : filter
  : first
  : last
+ : butlast
  : head
  : identity
  : inc

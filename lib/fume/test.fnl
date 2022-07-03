@@ -164,6 +164,14 @@
   (is.eq? :a (fume.last [:a]))
   (is.eq? nil (fume.last [])))
 
+(fn test-butlast
+  []
+  (is.not-nil? (fume.butlast [1 2 3]))
+  (is.eq? [1 2] (fume.butlast [1 2 3]))
+  (is.eq? [1 2] (fume.butlast [1 2 3]))
+  (is.eq? [] (fume.butlast [1]))
+  (is.eq? [] (fume.butlast [])))
+
 {: test-eq?
  : test-table?
  : test-boolean?
@@ -180,6 +188,7 @@
  : test-merge
  : test-split
  : test-last
+ : test-butlast
  }
 
 
