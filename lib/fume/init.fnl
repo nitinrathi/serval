@@ -45,6 +45,10 @@
 
 (local head first)
 
+(fn last
+  [x]
+  (. x (# x)))
+
 (fn keys
   [x]
   (let [_keys []]
@@ -223,6 +227,7 @@
  : nil?
  : filter
  : first
+ : last
  : head
  : identity
  : inc

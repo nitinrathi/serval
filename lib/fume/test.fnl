@@ -156,6 +156,14 @@
   (is.eq? [[2 3] [4 5 6]] (fume.split 1 [1 2 3 1 4 5 6 1]))
   (is.eq? [[2 3] [4 5 6]] (fume.split 1 [1 2 3 1 1 1 1 1 4 5 6 1])))
 
+(fn test-last
+  []
+  (is.not-nil? (fume.last [1 2 3]))
+  (is.eq? 3 (fume.last [1 2 3]))
+  (is.eq? :a (fume.last [1 2 3 :a]))
+  (is.eq? :a (fume.last [:a]))
+  (is.eq? nil (fume.last [])))
+
 {: test-eq?
  : test-table?
  : test-boolean?
@@ -170,6 +178,8 @@
  : test-len
  : test-rest
  : test-merge
- : test-split}
+ : test-split
+ : test-last
+ }
 
 

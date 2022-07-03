@@ -12,12 +12,15 @@
   (->> headers
        (table.concat)
        (str.split "\r\n")
+       (fume.split "")
+       (fume.last)
        (fume.filter (fume.complement str.blank?))
        (fume.filter (str.find ":"))
        (fume.rest)
        (fume.map http-utils.parse-header-line)
        (table.unpack)
        (fume.merge)))
+
 
 (fn GET [url]
   (let [body []
