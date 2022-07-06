@@ -26,6 +26,10 @@
        (fume.map http-utils.list->headers-table)
        (fume.map #(. $ :location))))
 
+(fn final-url
+  [uri redirections]
+  (or (fume.last redirections) uri))
+
 (fn GET [url]
   (let [body []
         headers []]
@@ -37,6 +41,7 @@
       (h:perform))
     {:headers (parse-headers headers)
      :redirections (redirections headers)
+     :url (final-url url (redirections headers))
      :body (table.concat body)}))
 
 {: GET}
