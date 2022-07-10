@@ -30,10 +30,10 @@
   [uri redirections]
   (or (fume.last redirections) uri))
 
-(fn GET [url]
+(fn GET [uri]
   (let [body []
         headers []]
-    (with-open [h (curl.easy {:url url
+    (with-open [h (curl.easy {:url uri
                               :httpheader ["User-Agent: pse crawler 0.0.1"]
                               :followlocation true
                               :headerfunction #(table.insert headers $)
@@ -41,7 +41,7 @@
       (h:perform))
     {:headers (parse-headers headers)
      :redirections (redirections headers)
-     :url (final-url url (redirections headers))
+     :uri (final-url uri (redirections headers))
      :body (table.concat body)}))
 
 {: GET}
