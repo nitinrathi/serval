@@ -73,7 +73,8 @@
 (fn crawl
   [{: uri}]
   (print "crawler.crawl: uri" uri)
-  (let [{:body content : uri}          (http.GET uri)
+  (let [{:body content : uri}    (http.GET uri)
+        uri                      (tostring (neturl.parse uri))
         {: links : text : title} (extract content uri)]
     {: text : links : uri : title}))
 
