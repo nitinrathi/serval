@@ -7,13 +7,15 @@
 (local sqlite (require :lsqlite3complete))
 (local str (require :lib.str))
 (local puremagic (require :lib.puremagic))
+(local utils (require :lib.utils))
 (local {: pnp 
         : pnp->
         : pnp->>
         : pprint 
         : update-table
         : update-table-on
-        } (require :lib.utils))
+        } utils)
+(local fume (require :lib.fume))
 (local {: complement 
         : map
         : dec
@@ -25,7 +27,7 @@
         : nil?
         : curry
         : always
-        } (require :lib.fume))
+        } fume)
 
 (fn add-host-scheme
   [scheme host url]
