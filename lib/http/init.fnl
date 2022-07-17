@@ -34,11 +34,12 @@
   (let [body []
         headers []]
     (with-open [h (curl.easy {:url uri
-                              :httpheader ["User-Agent: pse crawler 0.0.1"]
+                              :httpheader ["User-Agent: serval crawler 0.0.1 github.com/nitinrathi/serval"]
                               :followlocation true
                               :headerfunction #(table.insert headers $)
                               :writefunction {:write #(table.insert body $2)}})]
       (h:perform))
+    (print (table.concat headers))
     {:headers (parse-headers headers)
      :redirections (redirections headers)
      :uri (final-url uri (redirections headers))

@@ -1,7 +1,7 @@
 (local gumbo (require :gumbo))
 (local {: parse } gumbo)
-(local {: first : map : keys } (require :lib.fume))
 (local fume (require :lib.fume))
+(local {: first : map : keys } fume)
 
 (fn hello
   []
@@ -22,11 +22,6 @@
       (removeElementsByTagName :script)
       (. :body)
       (. :textContent)))
-
-(fn links-old
-  [html-content]
-  (let [parsed-html (parse html-content)]
-    (map (fn [elem] (elem:getAttribute "href")) parsed-html.links)))
 
 (fn links
   [html-content]
