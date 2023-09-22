@@ -36,12 +36,11 @@
   [html-content]
   (-> html-content
         parse
-        (: :getElementsByTagName :title) 
+        (: :getElementsByTagName :title)
         first
         (or {})
         (. :innerHTML)
         (or "")))
-
 
 {: title
  : text

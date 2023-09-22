@@ -178,7 +178,6 @@
          [:table :table] (eq-table? left right)
          _ false)))
 
-
 (fn sort
   [list f]
   (let [tbl []]
@@ -224,36 +223,35 @@
 
 (local split (curry 2 _split))
 
-{: always
+{
+ : always
+ : boolean?
+ : butlast
  : complement
  : curry
  : dec
- : true?
+ : eq?
  : false?
  : falsey?
- : nil?
  : filter
  : first
- : last
- : butlast
+ : fn?
  : head
  : identity
  : inc
  : items
  : keys
- : map
- : unique
- : type?
- : fn?
- : string?
- : number?
- : table?
- : boolean?
- : eq?
- : sort
+ : last
  : len
- : rest
+ : map
  : merge
- : split}
-
-
+ : nil?
+ : number?
+ : rest
+ : sort
+ : split
+ : string?
+ : table?
+ : true?
+ : type?
+ : unique }
